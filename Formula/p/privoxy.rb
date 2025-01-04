@@ -28,6 +28,8 @@ class Privoxy < Formula
   depends_on "libtool" => :build
   depends_on "pcre2"
 
+  uses_from_macos "zlib"
+
   # Backport PCRE2 support from HEAD. Remove in the next release.
   # Same patches used by Debian (excluding regression testcase 87253c99)
   patch do
