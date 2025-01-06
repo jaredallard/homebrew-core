@@ -1,8 +1,8 @@
 class MinioWarp < Formula
   desc "S3 benchmarking tool"
   homepage "https://github.com/minio/warp"
-  url "https://github.com/minio/warp/archive/refs/tags/v1.0.6.tar.gz"
-  sha256 "0e7cf5143c82059dad189a5445f36e83970129a320abd8b7b04c28f44c37e44d"
+  url "https://github.com/minio/warp/archive/refs/tags/v1.0.7.tar.gz"
+  sha256 "29069213b2573855a2716346085972d0936f63b71549848d8ddd29b54df50441"
   license "AGPL-3.0-or-later"
 
   bottle do
@@ -15,6 +15,12 @@ class MinioWarp < Formula
   end
 
   depends_on "go" => :build
+
+  # fix `list flag redefined: metadata` error, upstream pr ref, https://github.com/minio/warp/pull/356
+  patch do
+    url "https://github.com/minio/warp/commit/5484b972eb3c29783bccddac0c047d59000c94b3.patch?full_index=1"
+    sha256 "dabb945197aed1ae1be67baf442d0dd75a6f6c5abddf17485a596176cce25620"
+  end
 
   def install
     ldflags = %W[
